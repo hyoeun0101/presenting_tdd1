@@ -1,5 +1,6 @@
 package com.example.presenting_tdd;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -9,15 +10,16 @@ import static org.assertj.core.api.InstanceOfAssertFactories.completionStage;
 //@SpringBootTest
 class PresentingTddApplicationTests {
 
-	@Test
-	void canCreateCustomer() {
-		new Customer();
+	private Customer customer;
+
+	@BeforeEach
+	void setUp() {
+		customer = new Customer();
 	}
 
 	@Test
 	void childrensMovie_3일_대여한_경우() {
 		//Arrange
-		Customer customer = new Customer();
 		//Act
 		customer.rentMovie("title", MovieType.CHILDREN, 3);
 		//Assert
