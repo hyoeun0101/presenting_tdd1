@@ -19,21 +19,17 @@ class PresentingTddApplicationTests {
 
 	@Test
 	void childrensMovie_3일_대여한_경우() {
-		//Arrange
-		//Act
-		customer.rentMovie("title", MovieType.CHILDREN, 3);
-		//Assert
-		assertThat(customer.getRentalPoints()).isEqualTo(1);
-		assertThat(customer.getCharge()).isEqualTo(1.5);
+        rentMovieAndAssertPointsAndCharge("title", MovieType.CHILDREN, 3, 1, 1.5);
 	}
 
 	@Test
 	void childrensMovie_3일이상_대여한_경우() {
-		//Arrange
-		//Act
-		customer.rentMovie("title", MovieType.CHILDREN, 4);
-		//Assert
-		assertThat(customer.getRentalPoints()).isEqualTo(1);
-		assertThat(customer.getCharge()).isEqualTo(3.0);
+        rentMovieAndAssertPointsAndCharge("title", MovieType.CHILDREN, 4, 1, 3.0);
+	}
+
+	private void rentMovieAndAssertPointsAndCharge(String title, MovieType children, int daysRented, int expectedPoints, double expectedCharge) {
+		customer.rentMovie(title, children, daysRented);
+		assertThat(customer.getRentalPoints()).isEqualTo(expectedPoints);
+		assertThat(customer.getCharge()).isEqualTo(expectedCharge);
 	}
 }
