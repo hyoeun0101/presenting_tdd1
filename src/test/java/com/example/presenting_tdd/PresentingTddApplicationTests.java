@@ -45,7 +45,7 @@ class PresentingTddApplicationTests {
     }
 
     @Test
-    @Disabled
+//    @Disabled
     void multipleRentals() {
         customer.rentMovie("tittle", MovieType.CHILDREN,3);
         customer.rentMovie("tittle", MovieType.CHILDREN,4);

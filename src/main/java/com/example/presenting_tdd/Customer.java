@@ -1,43 +1,29 @@
 package com.example.presenting_tdd;
 
+import java.util.ArrayList;
+import java.util.List;
+
 enum MovieType {
     CHILDREN,
     REGULAR,
     NEW_RELEASE,
 }
 public class Customer {
-    private int daysRented;
-    private MovieType movieType;
+    private List<Rental> rentals = new ArrayList<>();
 
     public void rentMovie(String title, MovieType movieType, int daysRented) {
-        this.daysRented = daysRented;
-        this.movieType = movieType;
+        rentals.add(new Rental(title, movieType, daysRented));
     }
 
     public Integer getRentalPoints() {
-        if (movieType == MovieType.NEW_RELEASE && daysRented > 1) {
-            return 2;
-        }
-        return 1;
+        return rentals.stream()
+                .mapToInt(Rental::getRentalPoints)
+                .sum();
     }
 
     public Double getCharge() {
-        double charge = 0;
-        if (movieType == MovieType.CHILDREN) {
-            charge = 1.5;
-            if (daysRented > 3) {
-                charge += (daysRented - 3) * 1.5;
-            }
-        }
-        else if (movieType == MovieType.REGULAR) {
-            charge = 2;
-            if (daysRented > 2) {
-                charge += (daysRented - 2) * 1.5;
-            }
-        }
-        else if (movieType == MovieType.NEW_RELEASE) {
-            charge += daysRented * 3;
-        }
-        return charge;
+        return rentals.stream()
+                .mapToDouble(Rental::getCharge)
+                .sum();
     }
 }
