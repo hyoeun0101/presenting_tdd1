@@ -26,4 +26,14 @@ class PresentingTddApplicationTests {
 		assertThat(customer.getRentalPoints()).isEqualTo(1);
 		assertThat(customer.getCharge()).isEqualTo(1.5);
 	}
+
+	@Test
+	void childrensMovie_3일이상_대여한_경우() {
+		//Arrange
+		//Act
+		customer.rentMovie("title", MovieType.CHILDREN, 4);
+		//Assert
+		assertThat(customer.getRentalPoints()).isEqualTo(1);
+		assertThat(customer.getCharge()).isEqualTo(3.0);
+	}
 }
