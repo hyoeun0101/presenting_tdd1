@@ -1,16 +1,15 @@
 package com.example.presenting_tdd;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.completionStage;
 
 //@SpringBootTest
 class PresentingTddApplicationTests {
@@ -43,5 +42,19 @@ class PresentingTddApplicationTests {
                 , Arguments.of("newReleaseMovie1", MovieType.NEW_RELEASE, 1, 1, 3)
                 , Arguments.of("newReleaseMovie2", MovieType.NEW_RELEASE, 2, 2, 6)
         );
+    }
+
+    @Test
+    @Disabled
+    void multipleRentals() {
+        customer.rentMovie("tittle", MovieType.CHILDREN,3);
+        customer.rentMovie("tittle", MovieType.CHILDREN,4);
+        customer.rentMovie("tittle", MovieType.REGULAR,   2);
+        customer.rentMovie("tittle", MovieType.REGULAR,   3);
+        customer.rentMovie("tittle", MovieType.NEW_RELEASE, 1);
+        customer.rentMovie("tittle", MovieType.NEW_RELEASE, 2);
+
+        assertThat(customer.getRentalPoints()).isEqualTo(7);
+        assertThat(customer.getCharge()).isEqualTo(19.0);
     }
 }
