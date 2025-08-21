@@ -22,14 +22,10 @@ class PresentingTddApplicationTests {
         customer = new Customer();
     }
 
-    @Test
-    void childrensMovie_3일_대여한_경우() {
-        rentMovieAndAssertPointsAndCharge("title", MovieType.CHILDREN, 3, 1, 1.5);
-    }
-
-    @Test
-    void childrensMovie_3일이상_대여한_경우() {
-        rentMovieAndAssertPointsAndCharge("title", MovieType.CHILDREN, 4, 1, 3.0);
+    @ParameterizedTest
+    @MethodSource("provideMovieAndExpectedValues")
+    public void rentalForVariousCase(String title, MovieType children, int daysRented, int expectedPoints, double expectedCharge) {
+        rentMovieAndAssertPointsAndCharge(title, children, daysRented, expectedPoints, expectedCharge);
     }
 
     private void rentMovieAndAssertPointsAndCharge(String title, MovieType children, int daysRented, int expectedPoints, double expectedCharge) {
@@ -38,20 +34,14 @@ class PresentingTddApplicationTests {
         assertThat(customer.getCharge()).isEqualTo(expectedCharge);
     }
 
-	@ParameterizedTest
-	@MethodSource("provideMovieAndExpectedValues")
-	public void rentalForVariouseCase(String title, MovieType children, int daysRented, int expectedPoints, double expectedCharge) {
-		rentMovieAndAssertPointsAndCharge(title, children, daysRented, expectedPoints, expectedCharge);
-	}
-
     public static Stream<Arguments> provideMovieAndExpectedValues() {
         return Stream.of(
                 Arguments.of("childrenMovie1", MovieType.CHILDREN, 3, 1, 1.5)
                 , Arguments.of("childrenMovie2", MovieType.CHILDREN, 4, 1, 3)
-//				, Arguments.of("regularMovie1", MovieType.REGULAR, 2, 1, 2)
-//				, Arguments.of("regularMovie2", MovieType.REGULAR, 3, 1, 3.5)
-//				, Arguments.of("newReleaseMovie1", MovieType.NEW_RELEASE, 1, 1, 3)
-//				, Arguments.of("newReleaseMovie2", MovieType.NEW_RELEASE, 2, 2, 6)
+                , Arguments.of("regularMovie1", MovieType.REGULAR, 2, 1, 2)
+                , Arguments.of("regularMovie2", MovieType.REGULAR, 3, 1, 3.5)
+                , Arguments.of("newReleaseMovie1", MovieType.NEW_RELEASE, 1, 1, 3)
+                , Arguments.of("newReleaseMovie2", MovieType.NEW_RELEASE, 2, 2, 6)
         );
     }
 }
