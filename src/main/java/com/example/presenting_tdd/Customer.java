@@ -3,11 +3,7 @@ package com.example.presenting_tdd;
 import java.util.ArrayList;
 import java.util.List;
 
-enum MovieType {
-    CHILDREN,
-    REGULAR,
-    NEW_RELEASE,
-}
+
 public class Customer {
     private List<Rental> rentals = new ArrayList<>();
 

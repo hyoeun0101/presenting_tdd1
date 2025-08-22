@@ -1,5 +1,11 @@
 package com.example.presenting_tdd;
 
+enum MovieType {
+    CHILDREN,
+    REGULAR,
+    NEW_RELEASE,
+}
+
 public abstract class Movie {
     MovieType movieType;
     String title;
