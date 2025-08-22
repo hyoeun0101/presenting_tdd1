@@ -8,7 +8,7 @@ public class Rental {
     public Rental() {}
 
     public Rental(String title, MovieType movieType, int daysRented) {
-        this.movie = new Movie(title, movieType);
+        this.movie = Movie.of(title, movieType);
         this.daysRented = daysRented;
     }
 

@@ -4,9 +4,13 @@ public class Movie {
     MovieType movieType;
     String title;
 
-    public Movie(String title, MovieType movieType) {
+    private Movie(String title, MovieType movieType) {
         this.title = title;
         this.movieType = movieType;
+    }
+
+    public static Movie of(String title, MovieType movieType) {
+        return new Movie(title, movieType);
     }
 
     public Integer getRentalPoints(int daysRented) {
