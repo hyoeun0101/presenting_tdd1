@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Customer {
+public class RentalCalculator {
     private List<Rental> rentals = new ArrayList<>();
 
     public void rentMovie(String title, MovieType movieType, int daysRented) {

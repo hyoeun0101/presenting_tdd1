@@ -1,7 +1,6 @@
 package com.example.presenting_tdd;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,11 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 //@SpringBootTest
 class PresentingTddApplicationTests {
 
-    private Customer customer;
+    private RentalCalculator rentalCalculator;
 
     @BeforeEach
     void setUp() {
-        customer = new Customer();
+        rentalCalculator = new RentalCalculator();
     }
 
     @ParameterizedTest
@@ -28,9 +27,9 @@ class PresentingTddApplicationTests {
     }
 
     private void rentMovieAndAssertPointsAndCharge(String title, MovieType children, int daysRented, int expectedPoints, double expectedCharge) {
-        customer.rentMovie(title, children, daysRented);
-        assertThat(customer.getRentalPoints()).isEqualTo(expectedPoints);
-        assertThat(customer.getCharge()).isEqualTo(expectedCharge);
+        rentalCalculator.rentMovie(title, children, daysRented);
+        assertThat(rentalCalculator.getRentalPoints()).isEqualTo(expectedPoints);
+        assertThat(rentalCalculator.getCharge()).isEqualTo(expectedCharge);
     }
 
     public static Stream<Arguments> provideMovieAndExpectedValues() {
@@ -47,14 +46,14 @@ class PresentingTddApplicationTests {
     @Test
 //    @Disabled
     void multipleRentals() {
-        customer.rentMovie("tittle", MovieType.CHILDREN,3);
-        customer.rentMovie("tittle", MovieType.CHILDREN,4);
-        customer.rentMovie("tittle", MovieType.REGULAR,   2);
-        customer.rentMovie("tittle", MovieType.REGULAR,   3);
-        customer.rentMovie("tittle", MovieType.NEW_RELEASE, 1);
-        customer.rentMovie("tittle", MovieType.NEW_RELEASE, 2);
+        rentalCalculator.rentMovie("tittle", MovieType.CHILDREN,3);
+        rentalCalculator.rentMovie("tittle", MovieType.CHILDREN,4);
+        rentalCalculator.rentMovie("tittle", MovieType.REGULAR,   2);
+        rentalCalculator.rentMovie("tittle", MovieType.REGULAR,   3);
+        rentalCalculator.rentMovie("tittle", MovieType.NEW_RELEASE, 1);
+        rentalCalculator.rentMovie("tittle", MovieType.NEW_RELEASE, 2);
 
-        assertThat(customer.getRentalPoints()).isEqualTo(7);
-        assertThat(customer.getCharge()).isEqualTo(19.0);
+        assertThat(rentalCalculator.getRentalPoints()).isEqualTo(7);
+        assertThat(rentalCalculator.getCharge()).isEqualTo(19.0);
     }
 }
