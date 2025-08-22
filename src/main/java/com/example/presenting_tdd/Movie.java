@@ -4,13 +4,22 @@ public class Movie {
     MovieType movieType;
     String title;
 
-    private Movie(String title, MovieType movieType) {
+    protected Movie(String title, MovieType movieType) {
         this.title = title;
         this.movieType = movieType;
     }
 
     public static Movie of(String title, MovieType movieType) {
-        return new Movie(title, movieType);
+        switch (movieType) {
+            case CHILDREN :
+                return new ChildrenMovie(title);
+            case REGULAR:
+                return new RegularMovie(title);
+            case NEW_RELEASE :
+                return new NewReleaseMovie(title);
+            default :
+                throw new IllegalArgumentException("Invalid MovieType: " + movieType);
+        }
     }
 
     public Integer getRentalPoints(int daysRented) {
