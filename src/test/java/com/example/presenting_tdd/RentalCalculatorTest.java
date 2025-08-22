@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 //@SpringBootTest
-class PresentingTddApplicationTests {
+class RentalCalculatorTest {
 
     private RentalCalculator rentalCalculator;
 
